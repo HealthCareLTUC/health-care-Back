@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS doctor(
   location    varchar(200) NOT NULL,
   Specialty   varchar(200) NOT NULL,
   phone       integer  NOT NULL,
-  appointment varchar(200) NOT NULL
+  appointment varchar(200) 
 )
