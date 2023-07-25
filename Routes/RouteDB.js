@@ -94,9 +94,9 @@ RouteDB.post("/insertdrug", async (req, res) => {
 
 
 
-RouteDB.get("/getPatient", async (req, res, next) => {
+RouteDB.get("/getPatient/:id", async (req, res, next) => {
     try {
-        await client.query(`SELECT * FROM patient`).then((dbresponse) => {
+        await client.query(`SELECT * FROM patient WHERE id=${req.params.id}`).then((dbresponse) => {
             res.status(200).send(dbresponse.rows);
         })
     } catch (e) {
