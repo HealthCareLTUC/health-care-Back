@@ -35,7 +35,7 @@ RouteDB.post("/insertDoctor", async (req, res, next) => {
     try {
 
         let name = req.body.n;
-        let pasword=req.body.pa;
+        let password=req.body.pa;
         let address = req.body.a;
         let specialty = req.body.s;
         let phone = req.body.p;
