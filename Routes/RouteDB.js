@@ -35,12 +35,13 @@ RouteDB.post("/insertDoctor", async (req, res, next) => {
     try {
 
         let name = req.body.n;
+        let pasword=req.body.pa;
         let address = req.body.a;
         let specialty = req.body.s;
         let phone = req.body.p;
 
-        let sql = (`INSERT INTO doctor(name,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5)`);
-        await client.query(sql, [name, address, specialty, phone, ""]);
+        let sql = (`INSERT INTO doctor(name,password,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5,$6)`);
+        await client.query(sql, [name, password,address, specialty, phone, ""]);
         res.json(`Thank you ${name} for joining our staff in the department of ${specialty}`)
     }
 
@@ -106,9 +107,9 @@ RouteDB.get("/getPatient", async (req, res, next) => {
 
 RouteDB.post("/insertPatenit", async (req, res, next) => {
     try {
-        const { n, h, ap, a } = req.body;
-        const sql = (`INSERT INTO patient (name, history,appointment,age) VALUES ($1,$2,$3,$4)`)
-        await client.query(sql, [n, h, ap, a]).then(() => {
+        const { n,pa, h, ap, a } = req.body;
+        const sql = (`INSERT INTO patient (name, password,history,appointment,age) VALUES ($1,$2,$3,$4,$5)`)
+        await client.query(sql, [n, pa,h, ap, a]).then(() => {
             res.status(201).send(` patient is added `);
         });
     } catch (e) {
