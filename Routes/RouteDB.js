@@ -104,6 +104,18 @@ RouteDB.get("/getPatient/:id", async (req, res, next) => {
     }
 });
 
+RouteDB.get("getPatientName/:name",async(req,res,next)=>{
+
+    try {
+        await client.query(`SELECT * FROM patient WHERE name=${req.params.name}`).then((dbresponse) => {
+            res.status(200).send(dbresponse.rows);
+        })
+    } catch (e) {
+        next("patient handler " + e);
+    }
+
+})
+
 
 RouteDB.post("/insertPatenit", async (req, res, next) => {
     try {
