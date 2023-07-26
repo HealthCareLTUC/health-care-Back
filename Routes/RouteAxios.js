@@ -63,7 +63,7 @@ const Doctor=require('../function/Doctorfunction')
         if (req.url == "/alldoctors") {
             let rawdata = await axios.get("https://abarham97.github.io/doctorAPI/doctor.json")
             let arr = []
-            rawdata?.data.forEach(e => arr.push(new Doctor(e["Provider Name "], e.City + " " + e.Address, e.Specialty, e["رقم الهاتف"], "")));
+            rawdata?.data.forEach(e => arr.push(new Doctor(e["Provider Name"], e.City + " " + e.Address, e.Specialty, e["رقم الهاتف"], "")));
             // rawdata?.data.forEach(e => {
             //     if ((client.query(`SELECT * FROM doctor WHERE phone=$1`,e["رقم الهاتف"]) != e["رقم الهاتف"])) {
             //         client.query(`INSERT INTO doctor(name,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5) `, [e["الجهة الطـبية"], e.City + " " + e.Address, e.Specialty, e["رقم الهاتف"], ""]).then(() => { res.send(`the movie ${title} has been added to database`) })
