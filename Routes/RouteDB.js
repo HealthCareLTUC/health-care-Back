@@ -137,7 +137,7 @@ RouteDB.post("/insertPatenit", async (req, res, next) => {
         const { n,pa, h, ap, a } = req.body;
         const sql = (`INSERT INTO patient (name, password,history,appointment,age) VALUES ($1,$2,$3,$4,$5)`)
         await client.query(sql, [n, pa,h, ap, a]).then(() => {
-            res.status(201).send(` patient is added `);
+            res.status(201).json(` patient is added `);
         });
     } catch (e) {
         next("patient post handler " + e);

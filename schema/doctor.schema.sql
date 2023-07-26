@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS doctor(
   password    varchar (200) NOT NULL,
   location    varchar(200) NOT NULL,
   Specialty   varchar(200) NOT NULL,
-  phone       integer  NOT NULL,
+  phone       varchar(200)  NOT NULL,
   appointment varchar(200) 
 )
