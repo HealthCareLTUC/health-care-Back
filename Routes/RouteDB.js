@@ -41,7 +41,7 @@ RouteDB.post("/insertDoctor", async (req, res, next) => {
         let phone = req.body.p;
 
         let sql = (`INSERT INTO doctor(name,password,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5,$6)`);
-        await client.query(sql, [name, password,address, specialty, phone, ""]);
+        await client.query(sql, [name,password,address, specialty, phone, ""]);
         res.send(`Thank you ${name} for joining our staff in the department of ${specialty}`)
     }
 
