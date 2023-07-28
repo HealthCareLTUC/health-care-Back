@@ -9,7 +9,22 @@ const client = require('../client')
 
 
 
+RouteDB.get("/DoctorName/:id", async (req, res, next) => {
 
+    try {
+        const { id } = req.params
+        const sql = `SELECT * FROM doctor WHERE id=$1`
+        await client.query(sql, [id]).then((doctor) => { res.status(200).send(doctor.rows) })
+
+    }
+    catch (e) {
+
+        next("doctor name handler " + e);
+
+    }
+
+
+})
 
 
 
