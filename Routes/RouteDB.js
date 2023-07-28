@@ -226,6 +226,21 @@ RouteDB.get("getAppointment/:id",(req,res,next)=>{
 
 
 })
+
+RouteDB.get("getpatientAppointment/:id",(req,res,next)=>{
+
+    try {
+        let sql = `SELECT * FROM appointment WHERE patient_id=${req.params.id}`;
+        client.query(sql).then((AppointmentData) => {
+            res.status(200).send(AppointmentData.rows);
+        });
+
+    } catch (error) {
+        next(`getAllAppointment:${error}`)
+    }
+
+
+})
 //patient_id
 
 RouteDB.post("/insertappointment", async (req, res, next) => {
