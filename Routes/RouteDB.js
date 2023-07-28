@@ -116,7 +116,7 @@ RouteDB.get("/getPatient/:id", async (req, res, next) => {
 
 // })
 
-RouteDB.get("/patientName/:names", async (req, res, next) => {
+RouteDB.get("/patientName/:patient_name", async (req, res, next) => {
 
     try {
         const { patient_name } = req.params
