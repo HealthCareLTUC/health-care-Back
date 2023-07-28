@@ -16,9 +16,9 @@ const client = require('../client')
 RouteDB.get("/DoctorName/:names", async (req, res, next) => {
 
     try {
-        const { names } = req.params
-        const sql = `SELECT * FROM doctor WHERE name=$1`
-        await client.query(sql, [names]).then((doctor) => { res.status(200).send(doctor.rows) })
+        const { doctor_name } = req.params
+        const sql = `SELECT * FROM doctor WHERE doctor_name=$1`
+        await client.query(sql, [doctor_name]).then((doctor) => { res.status(200).send(doctor.rows) })
 
     }
     catch (e) {
@@ -56,13 +56,13 @@ RouteDB.put("/updateDoctor/:id", async (req, res, next) => {
 
     try {
 
-        let name = req.body.n;
+        let doctor_name = req.body.n;
         let address = req.body.a;
         let specialty = req.body.s;
         let phone = req.body.p;
         let appointment = req.body.ap;
-        let sql = `UPDATE doctor SET name=$1,location=$2,Specialty=$3,phone=$4,appointment=$5 WHERE id=${req.params.id} `;
-        client.query(sql, [name, address, specialty, phone, appointment]).then(() => { res.send(`${name} you're data has been updated`) })
+        let sql = `UPDATE doctor SET doctor_name=$1,location=$2,Specialty=$3,phone=$4,appointment=$5 WHERE id=${req.params.id} `;
+        client.query(sql, [doctor_name, address, specialty, phone, appointment]).then(() => { res.send(`${doctor_name} you're data has been updated`) })
 
     }
 
@@ -119,9 +119,9 @@ RouteDB.get("/getPatient/:id", async (req, res, next) => {
 RouteDB.get("/patientName/:names", async (req, res, next) => {
 
     try {
-        const { names } = req.params
-        const sql = `SELECT * FROM patient WHERE name=$1`
-        await client.query(sql, [names]).then((patient) => { res.status(200).send(patient.rows) })
+        const { patient_name } = req.params
+        const sql = `SELECT * FROM patient WHERE patient_name=$1`
+        await client.query(sql, [patient_name]).then((patient) => { res.status(200).send(patient.rows) })
 
     }
     catch (e) {
@@ -135,7 +135,7 @@ RouteDB.get("/patientName/:names", async (req, res, next) => {
 RouteDB.post("/insertPatenit", async (req, res, next) => {
     try {
         const { n,pa, h, ap, a } = req.body;
-        const sql = (`INSERT INTO patient (name, password,history,appointment,age) VALUES ($1,$2,$3,$4,$5)`)
+        const sql = (`INSERT INTO patient (patient_name, password,history,appointment,age) VALUES ($1,$2,$3,$4,$5)`)
         await client.query(sql, [n, pa,h, ap, a]).then(() => {
             res.status(201).json(` patient is added `);
         });
@@ -147,10 +147,10 @@ RouteDB.post("/insertPatenit", async (req, res, next) => {
 
 RouteDB.put('/updatePatient/:id', async (req, res, next) => {
     try {
-        let { name, history, appointment, age } = req.body;
+        let { patient_name, history, appointment, age } = req.body;
 
-        let sql = `UPDATE patient SET name=$1, history=$2, appointment=$3, age=$4  WHERE id=${req.params.id}`;
-        await client.query(sql, [name, history, appointment, age]).then(() => res.status(200).json("updated patient data")
+        let sql = `UPDATE patient SET patient_name=$1, history=$2, appointment=$3, age=$4  WHERE id=${req.params.id}`;
+        await client.query(sql, [patient_name, history, appointment, age]).then(() => res.status(200).json("updated patient data")
         )
     }
 
@@ -164,9 +164,9 @@ RouteDB.put('/updatePatient/:id', async (req, res, next) => {
 
 RouteDB.delete("/deletePatient/:n", async (req, res, next) => {
     try {
-        const name = req.params.n.toLocaleLowerCase();
+        const patient_name = req.params.n.toLocaleLowerCase();
         await client
-            .query(`DELETE FROM patient WHERE name='${name}'`)
+            .query(`DELETE FROM patient WHERE patient_name='${patient_name}'`)
             .then(() => { res.status(200).send(`Record is deleted`); })
     } catch (e) {
         next("patient delete handler " + e);
