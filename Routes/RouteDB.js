@@ -9,7 +9,7 @@ const client = require('../client')
 
 
 
-RouteDB.get("/DoctorName/:id", async (req, res, next) => {
+RouteDB.get("/GETDoctorid/:id", async (req, res, next) => {
 
     try {
         const { id } = req.params
