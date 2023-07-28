@@ -201,7 +201,7 @@ RouteDB.put('/updateAppointment/:id',async (req, res, next) => {
         // let sql = `UPDATE appointment SET  reservation_date=$3, reservation_time=$4,report=$5  WHERE id=${req.params.id}`;
         // client.query(sql, [ reservation_date, reservation_time, report]).then(() => res.status(200).json("updated Appointment ")
 
-       await client.query(sql, [patient_id, patient_name,doctor_id,doctor_name ,reservation_date, reservation_time, report])
+       await client.query(sql, [patient_id,patient_name,doctor_id,doctor_name ,reservation_date, reservation_time, report])
          res.status(200).json("updated Appointment ")
     }
        
@@ -269,7 +269,7 @@ RouteDB.post("/insertappointment", async (req, res, next) => {
       let report = req.body.report;
   
       let sql = `INSERT INTO appointment (patient_id,patient_name,Doctor_id,doctor_name, reservation_date, reservation_time, report) VALUES ($1, $2, $3, $4,$5)`;
-      await client.query(sql, [patient_id,patient_name,Doctor_id, doctor_name,reservation_date, reservation_time, report]);
+      await client.query(sql, [patient_id,patient_name,Doctor_id,doctor_name,reservation_date, reservation_time, report]);
       res.status(201).send(`Appointment added to the database`);
     } catch (e) {
       next(`insert Appointment + ${e}`);
