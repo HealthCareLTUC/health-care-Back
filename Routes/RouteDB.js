@@ -195,13 +195,13 @@ RouteDB.delete("/deletePatient/:n", async (req, res, next) => {
 
 RouteDB.put('/updateAppointment/:id',async (req, res, next) => {
     try {
-        let { patient_id, doctor_id, reservation_date, reservation_time, report } = req.body;
+        let { patient_id, patient_name,doctor_id, doctor_name,reservation_date, reservation_time, report } = req.body;
         // let {  reservation_date, reservation_time, report } = req.body;
-        let sql = `UPDATE appointment SET patient_id=$1, doctor_id=$2, reservation_date=$3, reservation_time=$4,report=$5  WHERE appointment_id=${req.params.id}`;
+        let sql = `UPDATE appointment SET patient_id=$1,patient_name=$2 ,doctor_id=$3,doctor_name=$4 ,reservation_date=$5, reservation_time=$6,report=$7  WHERE appointment_id=${req.params.id}`;
         // let sql = `UPDATE appointment SET  reservation_date=$3, reservation_time=$4,report=$5  WHERE id=${req.params.id}`;
         // client.query(sql, [ reservation_date, reservation_time, report]).then(() => res.status(200).json("updated Appointment ")
 
-       await client.query(sql, [patient_id, doctor_id, reservation_date, reservation_time, report])
+       await client.query(sql, [patient_id, patient_name,doctor_id,doctor_name ,reservation_date, reservation_time, report])
          res.status(200).json("updated Appointment ")
     }
        
@@ -261,13 +261,15 @@ RouteDB.get("/getpatientAppointment/:id",(req,res,next)=>{
 RouteDB.post("/insertappointment", async (req, res, next) => {
     try {
       let patient_id = req.body.patient_id; 
+      let patient_name= req.body.patient_name
       let Doctor_id = req.body.Doctor_id; 
+      let doctor_name= req.body.doctor_name
       let reservation_date = req.body.reservation_date;
       let reservation_time = req.body.reservation_time;
       let report = req.body.report;
   
-      let sql = `INSERT INTO appointment (patient_id,Doctor_id, reservation_date, reservation_time, report) VALUES ($1, $2, $3, $4,$5)`;
-      await client.query(sql, [patient_id,Doctor_id, reservation_date, reservation_time, report]);
+      let sql = `INSERT INTO appointment (patient_id,patient_name,Doctor_id,doctor_name, reservation_date, reservation_time, report) VALUES ($1, $2, $3, $4,$5)`;
+      await client.query(sql, [patient_id,Reserve,Doctor_id, doctor_name,reservation_date, reservation_time, report]);
       res.status(201).send(`Appointment added to the database`);
     } catch (e) {
       next(`insert Appointment + ${e}`);
