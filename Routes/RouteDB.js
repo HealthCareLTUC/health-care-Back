@@ -268,7 +268,7 @@ RouteDB.post("/insertappointment", async (req, res, next) => {
       let reservation_time = req.body.reservation_time;
       let report = req.body.report;
   
-      let sql = `INSERT INTO appointment (patient_id,patient_name,Doctor_id,doctor_name, reservation_date, reservation_time, report) VALUES ($1, $2, $3, $4,$5)`;
+      let sql = `INSERT INTO appointment (patient_id,patient_name,Doctor_id,doctor_name, reservation_date, reservation_time, report) VALUES ($1, $2, $3, $4,$5,$6,$7)`;
       await client.query(sql, [patient_id,patient_name,Doctor_id,doctor_name,reservation_date, reservation_time, report]);
       res.status(201).send(`Appointment added to the database`);
     } catch (e) {
