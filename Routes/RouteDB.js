@@ -28,7 +28,7 @@ RouteDB.get("/GETDoctorid/:id", async (req, res, next) => {
 
 
 
-RouteDB.get("/DoctorName/:names", async (req, res, next) => {
+RouteDB.get("/DoctorName/:doctor_name", async (req, res, next) => {
 
     try {
         const { doctor_name } = req.params
