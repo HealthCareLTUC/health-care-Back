@@ -228,7 +228,7 @@ RouteDB.get("/getAllAppointment", (req, res, next) => {
 
 })
 
-RouteDB.get("getAppointment/:id",(req,res,next)=>{
+RouteDB.get("/getAppointment/:id",(req,res,next)=>{
 
     try {
         let sql = `SELECT * FROM appointment WHERE Doctor_id=${req.params.id}`;
