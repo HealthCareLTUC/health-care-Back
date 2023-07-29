@@ -55,9 +55,10 @@ RouteDB.post("/insertDoctor", async (req, res, next) => {
         let specialty = req.body.s;
         let phone = req.body.p;
 
-        let sql = (`INSERT INTO doctor(doctor_name,password,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5,$6)`);
-        await client.query(sql, [doctor_name,password,address, specialty, phone, ""]);
-        res.json(`Thank you ${doctor_name} for joining our staff in the department of ${specialty}`)
+        let sql = (`INSERT INTO doctor(doctor_name,password,location,Specialty,phone,appointment) VALUES($1,$2,$3,$4,$5,$6) RETURNING id` );
+       let result= await client.query(sql, [doctor_name,password,address, specialty, phone, ""]);
+       const newDoctorId =result.rows[0].id;
+        res.json(newDoctorId,`Thank you ${doctor_name} for joining our staff in the department of ${specialty}`)
     }
 
 
